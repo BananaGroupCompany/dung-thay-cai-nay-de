@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING SHOES | Orders</title>
+    <link rel="stylesheet" href="asset/grid.css">
+    <link rel="stylesheet" href="asset/base.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css">
+    <link rel="stylesheet" href="asset/order.css">
+    <link rel="shortcut icon" type="image/png" href="img/logo.png" />
+</head>
+<body>
+    <div class="img_main">
+        <div class="main_no_product">
+            <div class="main_no_product_outside">
+                <div class="main_close_number">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="X_close">
+                    <span class="icon">
+                        <i class="fas fa-check" id = "X_close_icon_X" ></i>
+                    </span>
+                    
+                    <div class = "X_content">
+                        Cám ơn quý khách đã lựa chọn Shoes
+                    </div>
+                </div> 
+            </div>
+    
+        </div>
+        <div class="main_no_product_2">
+            <div class="main_no_product_outside">
+                <div class="main_close_number">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="X_close">
+                    <i class="fas fa-times" id = "X_close_icon_X_2"></i>
+                    <div class = "X_content">
+                        Vui lòng nhập đầy đủ!
+                    </div>
+                </div> 
+            </div>
+            
+        </div>
+        <div class="main-form">
+            <form id="test-form" method="GET" action="https://script.google.com/macros/s/AKfycbz2XyW7GZxzl60mNCdFSb079DmQNyoz46UvJD0HmlCV9PxyFCOtJpDwGoZyvV58CTBx/exec">
+                
+                <div class="main_title">
+                    <div class="main_title_img">
+                        <img src="img/logo.png" alt="">
+                    </div>
+                    <div class="main_title_content">ShopShoes luôn đồng hành cùng các bạn❤️. Chúc các bạn thật nhiều sức khỏe</div>
+                    
+                </div>
+                <div class="form_oder">
+                    <label for="">Họ và tên</label>
+                    <input type="text" name="Họ và tên" placeholder="Phạm Tùng Dương" required/>
+                </div>
+                <div class="form_oder">
+                    <label for="">Email</label>
+                    <input type="text" name="Email" placeholder="examples@example.com" required/>
+                </div>
+                <div class="form_oder">
+                    <label for="">Tên sản phẩm:</label>
+                    <input type="text" name="Tên giày" placeholder="MC QUEEN" required/>
+                </div>
+                <div class="form_oder">
+                    <label for="">Mã hàng</label>
+                    <input type="text" name="Mã hàng" placeholder="ABC123" required/>
+                </div>
+                <div class="form_oder">
+                    <label for="">Size</label>
+                    <input type="text" name="Size Shoes" placeholder="40" required/>
+                </div>
+                <div class="form_oder">
+                    <label for="">Số điện thoại</label>
+                    <input type="text" name="Số điện thoại" placeholder="xxx-xxx-xxxx" required/>
+                </div>
+                <div class="form_oder">
+                    <label for="">Địa chỉ</label>
+                    <input type="text" name="Địa chỉ" placeholder="Thanh Hóa" required/>
+                </div>
+                <div class="form_oder">
+                    <label for="">Ghi chú</label>
+                    <input type="text" name="Ghi chú" placeholder="Note" required/>
+                </div>
+                <button type="submit" onclick="tai_lai_trang()">Gửi</button>
+            </form>
+    
+        </div>
+    </div>
+       
+   
+    
+</body>
+
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var submit = $("button[type='submit']");
+        submit.click(function () {
+            var data = $('form#test-form').serialize();
+            $.ajax({
+                type: 'GET',
+                url: 'https://script.google.com/macros/s/AKfycbz2XyW7GZxzl60mNCdFSb079DmQNyoz46UvJD0HmlCV9PxyFCOtJpDwGoZyvV58CTBx/exec',
+                dataType: 'json',
+                crossDomain: true,
+                data: data,
+                success: function (data) {
+                    if (data == 'false') {
+                        alert(
+                            'Thêm không thành công, bạn cũng có thể sử dụng để hiển thị Popup hoặc điều hướng');
+                    } else {}
+                }
+            });
+            return false;
+        });
+    });
+    
+    
+</script>
+<script>
+    function tai_lai_trang(){
+        var input_text = document.querySelectorAll("input[type='text']");
+        var count = 0;
+        input_text.forEach((input)=>{
+            if(input.value){
+                count +=1;
+            }
+        })
+        if(count == 8){
+            var main_product= document.querySelector('.main_no_product');
+            main_product.style.display = 'flex';
+            var click_no_product = document.querySelector('.main_no_product');
+            click_no_product.onclick = function(e){
+                click_no_product.style.display = 'none';
+                location.reload();
+            }
+            var click_close_number = document.querySelector('.main_close_number');
+            click_close_number.onclick = function(e){
+                e.stopPropagation();
+                var click_no_product = document.querySelector('.main_no_product');
+                click_no_product.style.display = 'none';
+                location.reload();
+            }
+            var click_X_close = document.querySelector('.X_close');
+            click_X_close.onclick = function(e){
+                e.stopPropagation();
+                var click_no_product = document.querySelector('.main_no_product');
+                click_no_product.display = 'flex';
+            }
+            
+            
+        }
+        else{
+            var main_product= document.querySelector('.main_no_product_2');
+            main_product.style.display = 'flex';
+            var click_no_product = document.querySelector('.main_no_product_2');
+            click_no_product.onclick = function(e){
+                click_no_product.style.display = 'none';
+            }
+            var click_close_number = document.querySelector('.main_close_number');
+            click_close_number.onclick = function(e){
+                e.stopPropagation();
+                var click_no_product = document.querySelector('.main_no_product_2');
+                click_no_product.style.display = 'none';
+            }
+            var click_X_close = document.querySelector('.X_close');
+            click_X_close.onclick = function(e){
+                e.stopPropagation();
+                var click_no_product = document.querySelector('.main_no_product_2');
+                click_no_product.display = 'flex';
+            }
+        }
+        
+    }
+</script>
+<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/v4-shims.js"></script>
+<script src="JavaScript/order.js"></script>
+</html>
